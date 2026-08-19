@@ -18,4 +18,6 @@ If the user passed arguments, treat them as a description of what the next sessi
 
 Every handoff document gets a section naming who to ask — this session, under the `from-name` a peer confirms for you, plus any live session whose work overlaps and what each owns — when asking beats guessing on this specific work, and the boundary that a peer answers but never authorizes.
 
+Ask for a closing message too, sent when the work lands or is abandoned: what shipped, what was skipped, and what it decided differently from this document. The deviations are the part worth reading.
+
 Substance is in `coordinating-with-peer-sessions`. **Write it into the document**, because the receiving session may never invoke that skill and a bare pointer leaves it with nothing.
