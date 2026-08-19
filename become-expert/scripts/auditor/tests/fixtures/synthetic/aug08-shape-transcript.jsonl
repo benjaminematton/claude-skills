@@ -1,0 +1,16 @@
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s0", "name": "WebSearch", "input": {"query": "python logging sentry 0"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s0", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f200", "name": "WebFetch", "input": {"url": "https://docs.python.org/3/library/logging.html"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f200", "content": "Body text of the page."}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s1", "name": "WebSearch", "input": {"query": "python logging sentry 1"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s1", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f201", "name": "WebFetch", "input": {"url": "https://docs.sentry.io/platforms/python/"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f201", "content": "Body text of the page."}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s2", "name": "WebSearch", "input": {"query": "python logging sentry 2"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s2", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f202", "name": "WebFetch", "input": {"url": "https://blog.pilosus.org/posts/2020/01/24/python-logging/"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f202", "content": "Body text of the page."}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s3", "name": "WebSearch", "input": {"query": "python logging sentry 3"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s3", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f203", "name": "WebFetch", "input": {"url": "https://opentelemetry.io/docs/specs/otel/logs/"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f203", "content": "Body text of the page."}]}}

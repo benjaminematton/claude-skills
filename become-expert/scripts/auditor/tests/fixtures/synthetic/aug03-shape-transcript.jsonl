@@ -1,0 +1,118 @@
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s0", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 0"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s0", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s1", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 1"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s1", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s2", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 2"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s2", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s3", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 3"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s3", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s4", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 4"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s4", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s5", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 5"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s5", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s6", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 6"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s6", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s7", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 7"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s7", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s8", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 8"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s8", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s9", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 9"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s9", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s10", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 10"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s10", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s11", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 11"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s11", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s12", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 12"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s12", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s13", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 13"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s13", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s14", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 14"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s14", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s15", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 15"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s15", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s16", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 16"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s16", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s17", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 17"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s17", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s18", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 18"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s18", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s19", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 19"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s19", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s20", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 20"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s20", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s21", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 21"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s21", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s22", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 22"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s22", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s23", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 23"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s23", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s24", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 24"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s24", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s25", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 25"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s25", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s26", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 26"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s26", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s27", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 27"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s27", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s28", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 28"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s28", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s29", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 29"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s29", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s30", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 30"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s30", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s31", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 31"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s31", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s32", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 32"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s32", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s33", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 33"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s33", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s34", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 34"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s34", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s35", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 35"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s35", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s36", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 36"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s36", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s37", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 37"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s37", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s38", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 38"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s38", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s39", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 39"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s39", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s40", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 40"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s40", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s41", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 41"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s41", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s42", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 42"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s42", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s43", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 43"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s43", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s44", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 44"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s44", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s45", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 45"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s45", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s46", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 46"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s46", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s47", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 47"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s47", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s48", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 48"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s48", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s49", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 49"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s49", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s50", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 50"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s50", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s51", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 51"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s51", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s52", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 52"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s52", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "s53", "name": "WebSearch", "input": {"query": "accelerator cohort attribution 53"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "s53", "content": "10 results"}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f100", "name": "WebFetch", "input": {"url": "https://www.gener8tor.com/gbeta"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f100", "content": "Body text of the page."}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f101", "name": "WebFetch", "input": {"url": "https://www.gener8tor.com/gbeta/medtech"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f101", "content": "Body text of the page."}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f102", "name": "WebFetch", "input": {"url": "https://seed-db.com/accelerators"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f102", "content": "Body text of the page."}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f103", "name": "WebFetch", "input": {"url": "https://techstars.com/portfolio"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f103", "content": "Body text of the page."}]}}
+{"type": "assistant", "message": {"content": [{"type": "tool_use", "id": "f104", "name": "WebFetch", "input": {"url": "https://ycombinator.com/about"}}]}}
+{"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": "f104", "content": "Body text of the page."}]}}
