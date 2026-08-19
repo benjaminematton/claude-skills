@@ -35,7 +35,7 @@ Notation: `/name` = user must type it (user-invoked; nothing can fire it for the
 
 **Skills that only the human can invoke:** `/grill-with-docs`, `/grill-me`, `/to-spec`, `/implement`, `/improve-codebase-architecture`, `/to-questionnaire`, `/wait-what`, `/setup-matt-pocock-skills`.
 
-**Skills that fire from context (and can be chained):** `brainstorming`, `grilling`, `domain-modeling`, `codebase-design`, `prototype`, `writing-plans`, `subagent-driven-development`, `executing-plans`, `test-driven-development`, `systematic-debugging`, `code-review`, `review-plan`, `verification-before-completion`, `finishing-a-development-branch`, `using-git-worktrees`, `wizard`, `resolving-merge-conflicts`, `prompt-engineer`, `become-expert`, `frontend-design`, `web-design-guidelines`, `receiving-code-review`, `linear-delegation`, `simplify`, `handoff`.
+**Skills that fire from context (and can be chained):** `brainstorming`, `grilling`, `domain-modeling`, `codebase-design`, `prototype`, `writing-plans`, `subagent-driven-development`, `executing-plans`, `test-driven-development`, `systematic-debugging`, `code-review`, `review-plan`, `verification-before-completion`, `finishing-a-development-branch`, `using-git-worktrees`, `wizard`, `resolving-merge-conflicts`, `prompt-engineer`, `become-expert`, `frontend-design`, `web-design-guidelines`, `receiving-code-review`, `linear-delegation`, `simplify`, `handoff`, `writing-skills`, `coordinating-with-peer-sessions`.
 
 `handoff` moved to the chainable list on 2026-08-18: Claude Code exposes it as a model-invocable skill, so the router can produce a handoff doc itself rather than printing the command.
 
