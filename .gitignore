@@ -1,3 +1,23 @@
-__pycache__/
-*.pyc
+# macOS
 .DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Python artifacts from skills that ship scripts
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node artifacts from skills that ship scripts
+node_modules/
+
+# Local scratch — keep working notes out of a repo others clone
+scratch/
+*.local.md
+
+# No spec/design docs in this repo — skills only
+docs/
