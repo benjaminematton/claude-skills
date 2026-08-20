@@ -53,6 +53,13 @@ Then `ListAgents` for the live set.
 - **Rank by last activity.** `started X ago` is start time and says nothing about activity. Use the
   mtime of `~/.claude/projects/<escaped-cwd>/<sessionId>.jsonl`, where `<escaped-cwd>` is the cwd
   with every `/` and `.` turned into `-` (`tr './' '-'`).
+- **Re-check `ListAgents` immediately before you broadcast.** The roster is a snapshot and fleets
+  grow: one measured run built a roster of 3 and found 11 live sessions nineteen minutes later, 8 of
+  which did not exist when the roster was built. State coverage in the digest — "polled 3 of 11" — so
+  a partial round is never read as a complete one.
+- **A peer's other repos are invisible to you.** The roster is this repo's worktrees, so a peer's
+  "nothing is mine here" never means "nothing is mine anywhere". Do not let a clean map imply a clean
+  machine.
 
 Render the roster — name, worktree, last activity — and **wait for a yes before sending anything.**
 Each peer spends a turn on this. Append the `[ref]` from `ListAgents` where two live sessions share a
@@ -66,13 +73,15 @@ One `SendMessage` per rostered peer. Send this, with the user's focus line appen
 > flight.
 >
 > Get the factual half from commands, not memory: `git branch --show-current`, `git worktree list`,
-> `git status --short`, `git log --oneline -5`. A session that compacted an hour ago will confidently
-> report a branch it left.
+> `git status --short`. A session that compacted an hour ago will confidently report a branch it
+> left.
 >
 > Reply with exactly these fields:
 > - **branch / worktree** — verified
 > - **dirty** — paths from `git status --short`
-> - **recent** — last commits, plus one line on what they were for
+> - **recent** — commits **you** made, each checked with `git show --stat <sha>`, plus one line on
+>   what they were for. Not `git log -5`: in a shared checkout that returns the *branch's* history,
+>   which is mostly other sessions' work. "None" is a normal answer
 > - **owns** — regions, not filenames (`parse_config` and its callers; the retry block in `send()`).
 >   One file routinely has three owners; filenames produce false conflicts and hide real ones.
 > - **doing** — one line
@@ -117,6 +126,17 @@ Produce three parts, in this order:
 3. **Ownership map** — region → owner, plus **landing order** wherever a refactor and an addition
    collide. The refactor lands first and the addition conforms to the new shape; replaying a refactor
    over new code is where the errors come from.
+
+   **Key it on `[ref]`, not name.** Derived names collide — two live sessions answering to `fund-8b`
+   merge into one row in a name-keyed table, and a bare-name send to either one fails outright.
+
+   **Releases are first-class entries.** A session handing a region back belongs on the map as
+   plainly as one claiming it. A stale claim is worse than a blank: it makes the next session route
+   around a region nobody is in.
+
+   **A reservation is not a claim.** Scope a session intends to start later is information, not
+   ownership — record it as such. A map full of unstarted reservations teaches everyone to ignore the
+   next one.
 
 Write all three to `~/.claude/align/<repo-basename>/map.md` — outside every repo, so no working tree
 is dirtied. Then broadcast the map to the rostered peers with its authority stated inline:

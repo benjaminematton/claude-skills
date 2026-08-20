@@ -60,6 +60,16 @@ Then `ListAgents` for the live set.
   `/` and `.` turned into `-` (`tr './' '-'`). A session idle since yesterday has nothing to report;
   skip it silently. A daily ritual has to stay cheap.
 
+- **Append the `[ref]` from `ListAgents` where two live sessions share a name.** Derived names
+  collide — two sessions answering to `fund-8b` is common enough to plan for, and a bare-name send to
+  either one fails.
+- **A peer's other repos are invisible to you.** The roster is this repo's worktrees, so a peer's
+  "nothing is mine" covers this repo only.
+
+**Re-check `ListAgents` immediately before you broadcast.** The roster is a snapshot and fleets grow:
+one measured run built a roster of 3 and found 11 live sessions nineteen minutes later, 8 of which
+did not exist when it was built. State coverage in the digest — "polled 3 of 11".
+
 No manual gate — this runs every morning. Say who is being polled and who was skipped as idle, then
 send.
 
@@ -114,14 +124,25 @@ Build the digest:
    Each flag ends with where it goes: `→ /get-aligned` for ownership collisions, `→ ask <peer>
    directly` for a one-to-one unblock.
 
+   **Mark each flag reported or verified — and when it is unverified, say what you ran.** A failed
+   verification attempt is not an unverifiable claim. One run marked a database claim unverified
+   after `find -name "*.db"` returned nothing; it was the wrong host and the wrong extension, and the
+   peer who knew the system fixed it in one message *because it could see the search*. "Unverified"
+   with no method attached is unfalsifiable, and it makes everyone else stop looking.
+
 Write it to `~/.claude/align/<repo-basename>/standups/YYYY-MM-DD.md` — outside every repo, so no
 working tree is dirtied.
 
 **Then broadcast it to every rostered peer**, including the silent ones. This is the part that makes
-it a standup: each session learns what the others are doing. Give each copy a personalized tail:
+it a standup: each session learns what the others are doing. Give each copy a personalized tail that
+names **what concerns them**, never what they should do next:
 
-> **For you:** <peer> is blocked on <thing> and named you as the owner. / You and <peer> are both in
-> <region>. / Nothing for you today.
+> **Concerns you:** <peer> is blocked on <thing> and named you as the owner. / You and <peer> are
+> both in <region>. / Nothing concerns you today.
+
+A tail is a relevance filter, not an instruction slot. You are a peer, and a peer cannot assign work
+to a peer — "this is yours by authorship" is an assignment wearing a hint's clothing. Unowned work
+goes to the human as a flag, and stays unowned until they say otherwise.
 
 Report to the human last, leading with the unowned next plan task and the flags — those are the parts
 needing a decision.

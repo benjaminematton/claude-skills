@@ -58,6 +58,15 @@ for each session's `cwd` and `sessionId`, `ListAgents` for the live set.
   `git -C`. The roster is a floor; reconcile against what peers report.
 - **You are the one `ListAgents` omits.** Among session files whose `pid` is alive (`kill -0`), the
   one absent from `ListAgents` is this session.
+- **Append the `[ref]` where two live sessions share a name.** Derived names collide, and a bare-name
+  send to either of two `fund-8b`s fails.
+- **A peer's other repos are invisible to you.** The roster is this repo's worktrees, so a peer's
+  "nothing is mine" covers this repo only.
+
+**Re-check `ListAgents` immediately before you broadcast.** The roster is a snapshot and fleets grow:
+one measured run built a roster of 3 and found 11 live sessions nineteen minutes later, 8 of which
+did not exist when it was built. State coverage when you show the roster — "polled 3 of 11". A go
+issued off a stale roster is the failure this skill exists to prevent.
 
 **Do not trim by recency.** `/morning-standup` filters to sessions active since yesterday, because a
 quiet session has nothing to report. A huddle is the opposite: the session that has not spoken all
@@ -89,7 +98,9 @@ One `SendMessage` per peer, with the user's focus line appended if given:
 > path, or a branch name — the pointer, not the output.
 >
 > - **doing** — what you are on
-> - **owns** — regions, not filenames (`parse_config` and its callers; the retry block in `send()`)
+> - **owns** — regions, not filenames (`parse_config` and its callers; the retry block in `send()`).
+>   Releasing a region counts, and so does "nothing" — a stale claim is worse than a blank, because it
+>   makes everyone route around a region you already left
 > - **blocked** — what is stopping you and who owns that. "nothing" is valid and important here
 > - **path** — the right next move for the group, not just for you
 >
