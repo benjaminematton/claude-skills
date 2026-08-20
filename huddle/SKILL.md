@@ -30,6 +30,18 @@ Three sessions replying to each other's replies is unbounded, costs every sessio
 converges on nothing. The hub topology is what makes this skill terminate. If round two leaves a
 genuine disagreement, that is a finding for the human, not a reason to run round three.
 
+## Corrections that arrive outside the rounds
+
+Peers send corrections you did not ask for — retractions, self-corrections, a fix for a bug another
+session surfaced — and they arrive mid-phase, including after you have closed round two. Expect it.
+
+**They are evidence, not a third round.** Fold them into the path before you present it. If the path
+is already with the human, re-present the changed part rather than letting a stale path go out. Never
+broadcast a reply to one: that is what starts the lap the two-round bound exists to prevent.
+
+The bound governs what you solicit. It does not govern what arrives, and a round where several
+sessions overturn their own earlier claims is the round working, not failing.
+
 ## Phase 1 — roster
 
 Same join as `/get-aligned`: `git worktree list --porcelain` for repo paths, `~/.claude/sessions/*.json`
@@ -42,6 +54,11 @@ for each session's `cwd` and `sessionId`, `ListAgents` for the live set.
   `git -C`. The roster is a floor; reconcile against what peers report.
 - **You are the one `ListAgents` omits.** Among session files whose `pid` is alive (`kill -0`), the
   one absent from `ListAgents` is this session.
+
+**Do not trim by recency.** `/morning-standup` filters to sessions active since yesterday, because a
+quiet session has nothing to report. A huddle is the opposite: the session that has not spoken all
+day may be the one holding the region you are about to hand to someone else. Poll everyone live on
+the repo, and let the roster gate — not your own guess at who matters — be where it gets narrowed.
 
 Show the roster and **wait for a yes.** This round ends in code being written; the roster is who gets
 told to write it.
