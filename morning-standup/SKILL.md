@@ -1,0 +1,112 @@
+---
+name: morning-standup
+description: Daily standup across every active session on this repo — everyone reports, everyone hears the digest.
+argument-hint: "Anything to put on the agenda? (optional)"
+disable-model-invocation: true
+---
+
+# Morning standup
+
+A real standup: everyone says what they did, what they're doing, what's in their way — and
+**everyone hears everyone**. Cheap, timeboxed, no arbitration.
+
+Collisions get flagged here, not solved here. Solving them is `/get-aligned`, which publishes a
+binding ownership map. Taking it offline is the point of saying "take it offline".
+
+Doctrine for how peers talk lives in `coordinating-with-peer-sessions`. The messages below inline the
+rules they depend on, because a receiving session may never invoke that skill.
+
+## Phase 1 — roster
+
+Window start is the newest file in `~/.claude/align/<repo-basename>/standups/`. No file yet — first
+standup — use the last 24 hours.
+
+Join three sources:
+
+```bash
+git worktree list --porcelain | awk '/^worktree /{print $2}'   # every path in this repo
+for f in ~/.claude/sessions/*.json; do                          # cwd + sessionId per session
+  jq -r '[.pid,.name,.cwd,.sessionId]|@tsv' "$f" 2>/dev/null
+done
+```
+
+Then `ListAgents` for the live set.
+
+- **Match on `cwd`, never on the name prefix.** Names derive from the cwd basename, so a session in
+  `<repo>/.claude/worktrees/critic-seat` is named `critic-seat-xx` and a `fund-*` prefix misses it,
+  while the separate checkout `fund-improvement-loops` matches for the wrong reason.
+- **`cwd` is where a session sits, not what it edits.** A session in the main checkout can commit
+  into a worktree via `git -C`. Treat the roster as a floor; reconcile against what people report.
+- **You are the one `ListAgents` omits.** Among session files whose `pid` is alive (`kill -0`), the
+  one absent from `ListAgents` is this session. Exclude it.
+- **Include only sessions active since the window start** — mtime of
+  `~/.claude/projects/<escaped-cwd>/<sessionId>.jsonl`, where `<escaped-cwd>` is the cwd with every
+  `/` and `.` turned into `-` (`tr './' '-'`). A session idle since yesterday has nothing to report;
+  skip it silently. A daily ritual has to stay cheap.
+
+No manual gate — this runs every morning. Say who is being polled and who was skipped as idle, then
+send.
+
+## Phase 2 — poll
+
+One `SendMessage` per rostered peer. Send this, with the user's agenda line appended if given:
+
+> Morning standup. Answer at your next natural pause — do not abandon work in flight. Keep it to a
+> few lines; this is a standup, not a report.
+>
+> Four fields:
+> - **did** — what you worked on since <window start>, in your own words. Not a commit list.
+>   Point at whatever artifact backs it *if one exists* — a commit, a path, a branch, a spec, the
+>   file you abandoned. "No artifact yet, spent the morning reading `gate/`" is a fine answer.
+>   Design work, debugging, and dead ends all count as work.
+> - **doing** — one line
+> - **next** — one line
+> - **blocked** — what unblocks you and who owns that. "nothing" is valid.
+>
+> Where you name a fact — a branch, a path, a state — check it rather than recalling it. A session
+> that compacted an hour ago will confidently report a branch it left.
+
+Then **end the turn**, saying who you are waiting on, and start the deadline:
+
+```
+Bash(run_in_background: true): sleep 300
+```
+
+Replies arrive as `<cross-session-message>` notifications. A full house or the timer ends collection,
+whichever lands first.
+
+## Phase 3 — digest, to everyone
+
+Build the digest:
+
+1. **One block per session** — did / doing / next / blocked. Silent sessions named as silent.
+2. **Flags** — surfaced, never resolved:
+   - two sessions working the same region
+   - a blocker whose owner is another session in this standup
+   - a blocker carried over from the previous standup, marked with how many days it has been open
+   - two sessions stating contradictory facts about the same code
+
+   Each flag ends with where it goes: `→ /get-aligned` for ownership collisions, `→ ask <peer>
+   directly` for a one-to-one unblock.
+
+Write it to `~/.claude/align/<repo-basename>/standups/YYYY-MM-DD.md` — outside every repo, so no
+working tree is dirtied.
+
+**Then broadcast it to every rostered peer**, including the silent ones. This is the part that makes
+it a standup: each session learns what the others are doing. Give each copy a personalized tail:
+
+> **For you:** <peer> is blocked on <thing> and named you as the owner. / You and <peer> are both in
+> <region>. / Nothing for you today.
+
+Report to the human last, with the flags first — that is the part needing a decision.
+
+## When it goes sideways
+
+| Situation | Do this |
+|---|---|
+| No sessions active since the window | Say so, write no file, stop. A quiet morning is not a failure |
+| First run, no `standups/` dir | Create it, window is the last 24 hours, say that in the digest |
+| Peer answers with a wall of text | Summarize it to four fields in the digest. Do not re-ask; a standup does not block on one person |
+| Peer never answers | Named silent; still receives the digest |
+| A flag looks urgent | Still just a flag. Say `→ /get-aligned` and let the human fire it |
+| `git worktree list` fails | Stop with the error. Do not fall back to name matching |
