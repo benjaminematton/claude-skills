@@ -1,14 +1,27 @@
 ---
 name: get-aligned
-description: Poll every live session on this repo for status, then publish one ownership map back.
-argument-hint: "What is this alignment round about? (optional)"
+description: Align every live session on this repo — against a focus line if given, otherwise on who owns what.
+argument-hint: "What are we aligning on? e.g. 'live paper run tomorrow' — optional"
 disable-model-invocation: true
 ---
 
 # Get aligned
 
-One round of cross-session alignment, run from this seat. Poll the live sessions working this repo,
-find the overlaps and mutual blockers, publish one ownership map back.
+One round of cross-session alignment, run from this seat. Poll the live sessions working this repo
+and publish an ownership map back.
+
+**The focus line decides the round.**
+
+| Focus line | Round |
+|---|---|
+| Given — "live run tomorrow" | Peers answer against it; the digest is a readiness call, and the map assigns the gaps |
+| Absent | Peers report their own state; the digest is overlaps and mutual blockers, and the map assigns contested regions |
+
+Both share the roster, the poll mechanics, and the map. Only two things change, marked below: two
+extra fields in the poll, and the shape of the findings.
+
+For a cheap daily "where is everyone", use `/morning-standup` instead: active sessions only, no map,
+digest goes to everyone.
 
 Doctrine for how peers talk lives in `coordinating-with-peer-sessions`. This skill is one scheduled
 round of it. The messages below inline the rules they depend on, because a receiving session may
@@ -31,6 +44,10 @@ Then `ListAgents` for the live set.
   `<repo>/.claude/worktrees/critic-seat` is named `critic-seat-xx` and a `fund-*` prefix misses it,
   while the separate checkout `fund-improvement-loops` matches for the wrong reason. Keep a session
   whose `cwd` is at or under any worktree path.
+- **`cwd` is where a session sits, not what it edits.** A session in the main checkout can commit
+  into a worktree via `git -C`, and the join will not see it — an active worktree with no session
+  matching its path means someone is driving it from elsewhere. Treat the roster as a floor, not a
+  complete list, and reconcile it against what peers report owning.
 - **You are the one `ListAgents` omits.** It lists every peer except the caller. Among session files
   whose `pid` is alive (`kill -0`), the one absent from `ListAgents` is this session. Exclude it.
 - **Rank by last activity.** `started X ago` is start time and says nothing about activity. Use the
@@ -62,6 +79,14 @@ One `SendMessage` per rostered peer. Send this, with the user's focus line appen
 > - **next** — one line
 > - **blocked** — what unblocks you and who owns it. "nothing" is a valid answer.
 
+**If a focus line was given, add two fields** — and they are the ones that matter. The first six
+describe the session; these two describe the thing you are aligning on:
+
+> - **bearing** — what you hold that it touches or needs. "nothing of mine bears on it"
+>   is a valid and useful answer.
+> - **risk** — what you know that could stop it, including anything you were planning to land before
+>   it. Say it even if you think someone else has it covered.
+
 Then **end the turn**, saying who you are waiting on, and start the deadline:
 
 ```
@@ -77,9 +102,18 @@ Produce three parts, in this order:
 
 1. **Digest** — one block per session: doing / next / blocked. Name silent sessions as silent,
    carrying last-known state from the previous map if one exists.
-2. **Findings** — the point of the round. Two sessions claiming one region; a `dirty` path nobody
-   owns; a blocker whose unblocker is another polled session and does not know it; a `recent` commit
-   that contradicts another session's stated assumption.
+2. **Findings** — the point of the round, and the part the focus line changes.
+
+   *No focus line:* two sessions claiming one region; a `dirty` path nobody owns; a blocker whose
+   unblocker is another polled session and does not know it; a `recent` commit that contradicts
+   another session's stated assumption.
+
+   *With a focus line:* a **readiness call on it**, in this order — what is ready and who
+   verified it; what is missing, and for each gap the owner or **"unowned"**; what could stop it,
+   from the `risk` field; and one line saying whether it holds, naming the single thing most likely
+   to break it. An unowned gap is the most important output of the round: it is the work nobody
+   thinks is theirs. Never soften a readiness call to be encouraging — if the answer is that it does
+   not hold, say that first.
 3. **Ownership map** — region → owner, plus **landing order** wherever a refactor and an addition
    collide. The refactor lands first and the addition conforms to the new shape; replaying a refactor
    over new code is where the errors come from.
