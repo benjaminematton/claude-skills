@@ -16,9 +16,26 @@ license: MIT
 # LLM Judge Alignment
 
 <!-- Source: https://github.com/latitude-dev/eval-skills (MIT, Paula Cavero / Latitude).
-     Installed verbatim 2026-08-19. Skill 5 of 9 in that repo's eval workflow; the sibling
-     skills it references (llm-judge-creator, llm-golden-dataset-builder, llm-regression-runner,
-     llm-annotation-guide, llm-issue-discovery) are NOT installed here. -->
+     Installed 2026-08-19. Upstream is unmaintained (last commit 2026-04-24), so this copy
+     is the working version — there is nothing to sync back to.
+
+     LOCAL CHANGES (4), all 2026-08-19:
+       1. Removed the closing Latitude product upsell.
+       2. Step 2: added the held-out set, never read by the fix loop.
+       3. Step 5: fix loop returns to Step 2, not Step 3 — a new few-shot changes the
+          partition, so it must be recomputed before re-measuring.
+       4. Step 6: warning that the correction inherits bias in the rates it consumes and
+          judgy's CI does not cover it.
+
+     KNOWN GAPS, deliberately not fixed: the 20-30 sample-size floor and the 80%/90%
+     thresholds are unsourced (current guidance is 30-50 minimum, ~100 to act on; no
+     canonical numeric threshold exists). No confidence intervals on the rates themselves,
+     and no class-specific minimum, so a failure catch rate can rest on a handful of cases.
+     Open question: whether chance-correction (Cohen's kappa) adds anything once metrics
+     are split by true class — unresolved, so no kappa was added.
+
+     Skill 5 of 9 upstream; siblings (llm-judge-creator, llm-golden-dataset-builder,
+     llm-regression-runner, llm-annotation-guide, llm-issue-discovery) are NOT installed. -->
 
 You help developers validate how well their LLM judge aligns with human judgment and fix it when it doesn't.
 
@@ -66,6 +83,8 @@ Before measuring anything, identify which examples are already embedded in the j
 **Why this matters:** if the judge has already "seen" an example as part of its prompt, scoring it isn't a real test — the judge may pattern-match the example rather than applying the criterion. The test set must be examples the prompt has never seen.
 
 Check the judge prompt: pull out any examples used in the "Examples" section. Everything else in the labeled set is your test set.
+
+Then hold back about a third as a **held-out set** and choose it now, before you see any disagreements. Steps 3–5 read only the rest. Re-partitioning stops contamination but not overfitting — measuring on the pool you tune against makes the rates climb while the judge stays flat. Read the held-out set once, at the end; re-reading it after another fix spends it.
 
 If the test set ends up smaller than 20 examples after removing prompt examples:
 > "After setting aside the examples used in your judge prompt, you have [N] test cases — that's on the low end. If you can label 10–20 more, the measurement will be more reliable. That said, we can still get a directional read on [N]."
@@ -132,7 +151,7 @@ Based on the disagreement patterns, suggest the smallest edit that addresses the
 | All disagreements involve one specific input type | Add a targeted few-shot example for that input type |
 | Judge is conflating two dimensions | Split into two separate judges, one per dimension |
 
-After making the edit, go back to Step 3 and re-measure. Repeat until alignment meets the threshold.
+After making the edit, go back to Step 2 — the partition changed, so recompute it before re-measuring. Repeat until alignment meets the threshold.
 
 **If alignment stalls:**
 - Consider whether the criterion is fundamentally too subjective — some things genuinely need human judgment and resist automation
@@ -152,6 +171,8 @@ corrected pass rate = (observed pass rate + failure catch rate - 1) / (pass agre
 ```
 
 Where `observed pass rate` is the fraction of production outputs the judge scored as passing.
+
+The correction inherits whatever is wrong with the rates it consumes. If `pass agreement` and `failure catch rate` were inflated by tuning against the set that produced them, the corrected figure carries that inflation forward. `judgy`'s confidence interval is sampling variance only — it does not cover bias in its inputs, so a narrow interval here means precise, not correct.
 
 The `judgy` library (`pip install judgy`) handles this calculation and also returns a confidence interval:
 
