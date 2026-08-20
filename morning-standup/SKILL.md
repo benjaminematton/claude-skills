@@ -16,6 +16,22 @@ binding ownership map. Taking it offline is the point of saying "take it offline
 Doctrine for how peers talk lives in `coordinating-with-peer-sessions`. The messages below inline the
 rules they depend on, because a receiving session may never invoke that skill.
 
+## Phase 0 — read the plan
+
+Before polling anyone, read this repo's **design doc** and **progress doc**. A standup with no board
+behind it can only report motion; with the board it can report motion *against the plan*, which is
+the part worth your attention.
+
+Find them, in this order: the repo's `CLAUDE.md` or `AGENTS.md` usually names them outright; then
+`specs/design.md`, `plans/*.md`, `ROADMAP.md`, `docs/`. Progress usually lives in the plan files as
+task-completion state, not in a file called progress.
+
+Read them **once, here.** Do not ask peers to read them — that is the same file parsed N times, and
+they are mid-task.
+
+No design or progress doc in this repo? Say so in one line and run the standup without this section.
+Do not invent a plan to measure people against.
+
 ## Phase 1 — roster
 
 Window start is the newest file in `~/.claude/align/<repo-basename>/standups/`. No file yet — first
@@ -59,7 +75,8 @@ One `SendMessage` per rostered peer. Send this, with the user's agenda line appe
 >   Point at whatever artifact backs it *if one exists* — a commit, a path, a branch, a spec, the
 >   file you abandoned. "No artifact yet, spent the morning reading `gate/`" is a fine answer.
 >   Design work, debugging, and dead ends all count as work.
-> - **doing** — one line
+> - **doing** — one line. Name the plan task or phase it serves if there is one; "not on the plan" is
+>   a fine and useful answer
 > - **next** — one line
 > - **blocked** — what unblocks you and who owns that. "nothing" is valid.
 >
@@ -80,7 +97,15 @@ whichever lands first.
 Build the digest:
 
 1. **One block per session** — did / doing / next / blocked. Silent sessions named as silent.
-2. **Flags** — surfaced, never resolved:
+2. **Against the plan** — only if Phase 0 found the docs. Three lines, no more:
+   - plan tasks in flight, and who has each
+   - **the next plan task nobody is on** — the single most useful line in the standup
+   - **drift** — work reported that no plan task covers, and plan tasks someone is treating as done
+     that the doc still shows open
+
+   Report drift as a fact, not a verdict. A session working off-plan is often right and the doc is
+   often stale; the standup's job is to make the divergence visible, not to rule on it.
+3. **Flags** — surfaced, never resolved:
    - two sessions working the same region
    - a blocker whose owner is another session in this standup
    - a blocker carried over from the previous standup, marked with how many days it has been open
@@ -98,7 +123,8 @@ it a standup: each session learns what the others are doing. Give each copy a pe
 > **For you:** <peer> is blocked on <thing> and named you as the owner. / You and <peer> are both in
 > <region>. / Nothing for you today.
 
-Report to the human last, with the flags first — that is the part needing a decision.
+Report to the human last, leading with the unowned next plan task and the flags — those are the parts
+needing a decision.
 
 ## When it goes sideways
 
