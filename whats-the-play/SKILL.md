@@ -36,6 +36,7 @@ Numbered steps. For each:
 - **What to type** — the exact command, or "(fires automatically)" for model-invoked skills
 - **What comes out** — the artifact (design doc, spec, plan file, diff, report). A step with no artifact is a step you can't verify happened.
 - **Why it's here** — one clause, specific to this work. Not "to plan the work" but "to pin down what 'edit' means when three events match."
+- **Who runs it** — include this bullet on any step that reviews, audits, or grades an artifact this conversation produced. It names a fresh context, and says what is withheld from it. A session cannot audit what it wrote: it reads its intended meaning into its own ambiguous wording, so it finds the artifact consistent with itself. Put this in the step. Naming it under **Watch for** does not count — the numbered steps are what get executed.
 
 Then two short sections:
 
