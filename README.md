@@ -23,7 +23,7 @@ ln -s ~/src/claude-skills/whats-the-play ~/.claude/skills/whats-the-play
 
 | Skill | | What it does |
 |---|---|---|
-| [`whats-the-play`](whats-the-play/) | `/name` | Describe the work; get the optimal sequence of the skills below, then start it. A router over this whole repo. |
+| [`whats-the-play`](whats-the-play/) | `/name` | Describe the work; get the optimal sequence of the skills below, then start it. A router over this whole repo — fourteen scenarios, an invocation law, and adaptation rules, retrieval-tested against fresh sessions. |
 
 ---
 
@@ -114,7 +114,7 @@ Building and validating LLM judges. The pairing matters: design the suite first,
 
 Three rules this repo tries to hold to. They're the reason it's worth cloning rather than assembling your own from the same sources.
 
-**Forks carry their provenance.** A vendored skill that's been modified says so in its own header: upstream URL and license, a numbered list of every local change, and — the part people skip — a **known gaps** section stating what's still wrong and deliberately unfixed. See [`llm-judge-alignment`](llm-judge-alignment/SKILL.md) and [`build-a-scorer`](build-a-scorer/SKILL.md). A future reader can tell what upstream said, what I changed, and what I chose not to.
+**Forks carry their provenance.** A vendored skill's header records its upstream URL and license, every local change, and — the part people skip — what was considered and deliberately left undone. [`llm-judge-alignment`](llm-judge-alignment/SKILL.md) is the heavily-patched case: ten numbered changes against a dead upstream, plus the one fix that was evaluated and rejected, with reasoning. [`build-a-scorer`](build-a-scorer/SKILL.md) is the opposite call: upstream is alive, so the body stays verbatim and the header says re-pull rather than edit. Either way a future reader can tell what upstream said, what I changed, and what I chose not to.
 
 **Edits get a baseline first.** Changing a skill is changing behavior, so the change is tested the way code is: run the scenario against fresh sessions *before* the edit to see what actually goes wrong, make the smallest change that addresses it, then rerun. Most proposed edits die at the baseline because the failure isn't real — which is the point.
 
@@ -126,16 +126,21 @@ Most of this repo is other people's work, kept here because it's good.
 
 | Source | Skills |
 |---|---|
-| [Matt Pocock](https://github.com/mattpocock) | `become-expert`, `code-review`, `codebase-design`, `domain-modeling`, `google-devdocs-style`, `grill-me`, `grill-with-docs`, `grilling`, `handoff`, `implement`, `improve-codebase-architecture`, `linear-delegation`, `prompt-engineer`, `prototype`, `resolving-merge-conflicts`, `setup-matt-pocock-skills`, `to-questionnaire`, `to-spec`, `wait-what`, `whats-the-play`, `wizard`, `writing-for-agents` |
+| [Matt Pocock](https://github.com/mattpocock) | `code-review`, `codebase-design`, `domain-modeling`, `grill-me`, `grill-with-docs`, `grilling`, `handoff`, `implement`, `improve-codebase-architecture`, `prototype`, `resolving-merge-conflicts`, `setup-matt-pocock-skills`, `to-questionnaire`, `to-spec`, `wait-what`, `wizard`, `writing-for-agents` |
 | [GreenSock](https://gsap.com) | the seven `gsap-*` skills |
 | [Vercel](https://vercel.com) | `vercel-react-best-practices`, `web-design-guidelines` |
 | [Anthropic](https://anthropic.com) | `frontend-design` |
 | [MLflow](https://github.com/mlflow/skills) | `build-a-scorer` |
 | [Latitude](https://github.com/latitude-dev/eval-skills) | `llm-judge-alignment` |
+| [Jeffallan](https://github.com/Jeffallan) | `code-documenter`, `prompt-engineer` |
 
-Several have been extended locally — `whats-the-play` most heavily. Each modified skill's header records what changed.
+`review-plan` is adapted from Garry Tan's plan-mode workflow.
 
-Original here: the four multi-session coordination skills.
+`become-expert`, `google-devdocs-style`, and `linear-delegation` arrived from somewhere I can no longer trace. If one is yours, open an issue and I'll credit or remove it.
+
+Several vendored skills have been extended locally; each modified skill's header records what changed.
+
+**Original here:** [`whats-the-play`](whats-the-play/) and the four multi-session coordination skills.
 
 ## License
 

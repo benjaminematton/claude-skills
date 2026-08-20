@@ -24,10 +24,10 @@ SOFTWARE.
 
 SCOPE
 
-This license covers the original work in this repository: the multi-session
-coordination skills (coordinating-with-peer-sessions, get-aligned, huddle,
-morning-standup), local modifications to vendored skills, and repository
-documentation.
+This license covers the original work in this repository: whats-the-play, the
+multi-session coordination skills (coordinating-with-peer-sessions,
+get-aligned, huddle, morning-standup), local modifications to vendored skills,
+and repository documentation.
 
 It does NOT relicense skills copied from elsewhere. Those retain the license
 of their upstream source, recorded in each skill's frontmatter where upstream
@@ -39,7 +39,8 @@ declared one:
   vercel-react-best-practices  MIT          Vercel
   web-design-guidelines        —            Vercel
   frontend-design              see skill    Anthropic
-  code-documenter              MIT          —
+  code-documenter              MIT          github.com/Jeffallan
+  prompt-engineer              MIT          github.com/Jeffallan
   last30days                   MIT          —
 
 Skills authored by Matt Pocock (github.com/mattpocock) are vendored here under
