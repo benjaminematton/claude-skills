@@ -99,8 +99,9 @@ One `SendMessage` per peer, with the user's focus line appended if given:
 >
 > - **doing** — what you are on
 > - **owns** — regions, not filenames (`parse_config` and its callers; the retry block in `send()`).
->   Releasing a region counts, and so does "nothing" — a stale claim is worse than a blank, because it
->   makes everyone route around a region you already left
+>   Status per region: **live** / **parked** (yours, not being worked) / **held** (done, unshipped) /
+>   **prospective** (nothing started). "nothing" is a complete answer — a stale claim is worse than a
+>   blank, because it makes everyone route around a region you already left
 > - **blocked** — what is stopping you and who owns that. "nothing" is valid and important here
 > - **path** — the right next move for the group, not just for you
 >

@@ -83,7 +83,10 @@ One `SendMessage` per rostered peer. Send this, with the user's focus line appen
 >   what they were for. Not `git log -5`: in a shared checkout that returns the *branch's* history,
 >   which is mostly other sessions' work. "None" is a normal answer
 > - **owns** — regions, not filenames (`parse_config` and its callers; the retry block in `send()`).
->   One file routinely has three owners; filenames produce false conflicts and hide real ones.
+>   One file routinely has three owners; filenames produce false conflicts and hide real ones. Give
+>   each region a status: **live** (working it now), **parked** (yours, not being worked, resumable),
+>   **held** (complete but unshipped), **prospective** (intend to start, nothing begun). "nothing" is
+>   a complete answer.
 > - **doing** — one line
 > - **next** — one line
 > - **blocked** — what unblocks you and who owns it. "nothing" is a valid answer.
@@ -134,9 +137,10 @@ Produce three parts, in this order:
    plainly as one claiming it. A stale claim is worse than a blank: it makes the next session route
    around a region nobody is in.
 
-   **A reservation is not a claim.** Scope a session intends to start later is information, not
-   ownership — record it as such. A map full of unstarted reservations teaches everyone to ignore the
-   next one.
+   **Carry the status through to the map** — live / parked / held / prospective, per region. "I own
+   this and am not working it" and "I might work this later" are different facts, and a reader
+   deciding whether to touch a region needs to know which one they are looking at. A map full of
+   prospective entries read as claims teaches everyone to ignore the next one.
 
 Write all three to `~/.claude/align/<repo-basename>/map.md` — outside every repo, so no working tree
 is dirtied. Then broadcast the map to the rostered peers with its authority stated inline:

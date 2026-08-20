@@ -130,6 +130,10 @@ Build the digest:
    peer who knew the system fixed it in one message *because it could see the search*. "Unverified"
    with no method attached is unfalsifiable, and it makes everyone else stop looking.
 
+   The general form: **a session can report an absence, never verify one.** Nothing found, nobody
+   owning a region, no explanation for a staged change — each is a fact about your search, not about
+   the world. Say what you looked at and let the session that holds the missing context correct you.
+
 Write it to `~/.claude/align/<repo-basename>/standups/YYYY-MM-DD.md` — outside every repo, so no
 working tree is dirtied.
 
