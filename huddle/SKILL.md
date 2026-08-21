@@ -58,8 +58,8 @@ for each session's `cwd` and `sessionId`, `ListAgents` for the live set.
   `git -C`. The roster is a floor; reconcile against what peers report.
 - **You are the one `ListAgents` omits.** Among session files whose `pid` is alive (`kill -0`), the
   one absent from `ListAgents` is this session.
-- **Append the `[ref]` where two live sessions share a name.** Derived names collide, and a bare-name
-  send to either of two `fund-8b`s fails.
+- **Key your records on `sessionId`, not the name and not the `[ref]`.** Names churn and refs proved
+  unreliable across a measured 13-session round. Send to the name; record the `sessionId`.
 - **A peer's other repos are invisible to you.** The roster is this repo's worktrees, so a peer's
   "nothing is mine" covers this repo only.
 

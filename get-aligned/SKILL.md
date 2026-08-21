@@ -52,7 +52,10 @@ Then `ListAgents` for the live set.
   whose `pid` is alive (`kill -0`), the one absent from `ListAgents` is this session. Exclude it.
 - **Rank by last activity.** `started X ago` is start time and says nothing about activity. Use the
   mtime of `~/.claude/projects/<escaped-cwd>/<sessionId>.jsonl`, where `<escaped-cwd>` is the cwd
-  with every `/` and `.` turned into `-` (`tr './' '-'`).
+  with every `/` and `.` turned into `-` (`tr './' '-'`). **This stops being an activity signal the
+  moment a session enters a worktree** — its transcript moves to a worktree-scoped projects directory
+  and the old path goes quiet. One round read that as a 3.5-hour stall on a session that was working.
+  Ask before concluding anyone is idle.
 - **Re-check `ListAgents` immediately before you broadcast.** The roster is a snapshot and fleets
   grow: one measured run built a roster of 3 and found 11 live sessions nineteen minutes later, 8 of
   which did not exist when the roster was built. State coverage in the digest — "polled 3 of 11" — so
@@ -62,8 +65,11 @@ Then `ListAgents` for the live set.
   machine.
 
 Render the roster — name, worktree, last activity — and **wait for a yes before sending anything.**
-Each peer spends a turn on this. Append the `[ref]` from `ListAgents` where two live sessions share a
-name.
+Each peer spends a turn on this. **Key your records on `sessionId`, not on the name and not on the
+`[ref]`.** Measured across a 13-session round: six sessions had renamed that day, three reported refs
+that did not match `ListAgents`, and one send to a peer's own ref was refused. `sessionId` is stable
+for the life of the session and is the string on the editor tab. Send to the name — that is the
+address `SendMessage` takes — but record the `sessionId`.
 
 ## Phase 2 — poll
 
@@ -130,8 +136,9 @@ Produce three parts, in this order:
    collide. The refactor lands first and the addition conforms to the new shape; replaying a refactor
    over new code is where the errors come from.
 
-   **Key it on `[ref]`, not name.** Derived names collide — two live sessions answering to `fund-8b`
-   merge into one row in a name-keyed table, and a bare-name send to either one fails outright.
+   **Key it on `sessionId`.** Names collide and churn — two live sessions answering to `fund-8b`
+   merge into one row in a name-keyed table — and refs proved unreliable in practice. State the
+   deviation at the top of the map so readers know what the rows are keyed on.
 
    **Releases are first-class entries.** A session handing a region back belongs on the map as
    plainly as one claiming it. A stale claim is worse than a blank: it makes the next session route

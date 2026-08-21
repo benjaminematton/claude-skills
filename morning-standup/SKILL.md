@@ -58,11 +58,13 @@ Then `ListAgents` for the live set.
 - **Include only sessions active since the window start** — mtime of
   `~/.claude/projects/<escaped-cwd>/<sessionId>.jsonl`, where `<escaped-cwd>` is the cwd with every
   `/` and `.` turned into `-` (`tr './' '-'`). A session idle since yesterday has nothing to report;
-  skip it silently. A daily ritual has to stay cheap.
+  skip it silently. A daily ritual has to stay cheap. **But a session that entered a worktree writes
+  to a worktree-scoped projects directory, and its old path goes quiet while it works** — one round
+  read that as a 3.5-hour stall. Where a worktree exists for the session, check there before skipping.
 
-- **Append the `[ref]` from `ListAgents` where two live sessions share a name.** Derived names
-  collide — two sessions answering to `fund-8b` is common enough to plan for, and a bare-name send to
-  either one fails.
+- **Key your records on `sessionId`, not the name and not the `[ref]`.** Names churn — six sessions
+  renamed inside one day — and refs proved unreliable: three did not match `ListAgents` and one send
+  to a peer's own ref was refused. Send to the name; record the `sessionId`.
 - **A peer's other repos are invisible to you.** The roster is this repo's worktrees, so a peer's
   "nothing is mine" covers this repo only.
 
