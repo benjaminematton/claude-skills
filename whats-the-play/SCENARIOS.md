@@ -26,6 +26,7 @@ Notation: `/name` = user must type it (user-invoked; nothing can fire it for the
 | 12 | Delegating | assign, hand off, Linear |
 | 13 | Schema migration / backfill | migration, backfill, prod data |
 | 14 | Acting on review feedback | PR comments, reviewer disagrees |
+| 15 | Several chats on one plan | "in parallel", fan out, multiple sessions |
 
 ---
 
@@ -33,7 +34,9 @@ Notation: `/name` = user must type it (user-invoked; nothing can fire it for the
 
 **A user-invoked skill can never fire another user-invoked skill.** `[D]` Only the human can. So any sequence mixing them is a human-driven checklist, not an automated chain — and the router can only ever start step 1.
 
-**Skills that only the human can invoke:** `/grill-with-docs`, `/grill-me`, `/to-spec`, `/implement`, `/improve-codebase-architecture`, `/to-questionnaire`, `/wait-what`, `/setup-matt-pocock-skills`.
+**Skills that only the human can invoke:** `/grill-with-docs`, `/grill-me`, `/to-spec`, `/implement`, `/improve-codebase-architecture`, `/to-questionnaire`, `/wait-what`, `/setup-matt-pocock-skills`, `/split-the-plan`, `/get-aligned`, `/huddle`, `/morning-standup`.
+
+The four multi-session skills were missing from this list until 2026-08-21; all four declare `disable-model-invocation: true`. `/split-the-plan` is deliberately human-only: it creates a worktree per package, and a stray context match that provisions N copies of a codebase is expensive to undo.
 
 **Skills that fire from context (and can be chained):** `brainstorming`, `grilling`, `domain-modeling`, `codebase-design`, `prototype`, `writing-plans`, `subagent-driven-development`, `executing-plans`, `test-driven-development`, `systematic-debugging`, `code-review`, `review-plan`, `verification-before-completion`, `finishing-a-development-branch`, `using-git-worktrees`, `wizard`, `resolving-merge-conflicts`, `prompt-engineer`, `become-expert`, `frontend-design`, `web-design-guidelines`, `receiving-code-review`, `linear-delegation`, `simplify`, `handoff`, `writing-skills`, `coordinating-with-peer-sessions`, `llm-judge-alignment`, `build-a-scorer`.
 
@@ -232,6 +235,24 @@ Every scenario ends at `code-review` as though its output were terminal. It's an
 
 `[D]` Conflicts with a prior architectural decision of yours → stop and discuss, don't implement. `[D]` GitHub inline replies go in the comment thread (`gh api repos/{owner}/{repo}/pulls/{pr}/comments/{id}/replies`), not top-level.
 
+## 15. Several chats on one plan
+
+**Triggers:** "I want several chats working this", "in parallel", "fan out", more than one session on one plan.
+
+Every other scenario ends at an executor that is **sequential by design**. `[D]` `subagent-driven-development` lists "dispatch multiple implementation subagents in parallel" under what *not* to do, naming conflicts as the reason. `[D]` `dispatching-parallel-agents` is subagents inside one context, aimed at independent research domains — it is explicitly not for plan tasks. So nothing in the spine takes one plan across several seats.
+
+1. Normal spine through `writing-plans`. Parallelism is a property of *execution*, never of design — do not fan out a plan that hasn't been reviewed.
+2. `/split-the-plan` *(you type it)*. Reconciles the plan against the repo, partitions into packages, provisions a worktree each, writes the map, then tells you **how many chats to open**.
+3. **You open that many chats.** `[D]` An agent cannot open one for you: the VS Code extension registers no `onUri` handler and the `code` CLI has no command-invocation flag.
+4. `/split-the-plan` binds them by `startedAt` and `cwd`, then briefs each over `SendMessage`. No prompts to paste, no ids to copy.
+5. Lanes work; `TDD` inside each. `coordinating-with-peer-sessions` fires on its own when they talk.
+6. `/get-aligned` when you want a *considered* status — commits alone can't distinguish a lane building the right thing from one confidently building the wrong thing.
+7. Merge in the map's landing order, reap, `finishing-a-development-branch`.
+
+**Gate — scope decides** `[J]`: this is for work measured in **days**, where you'll want to steer while it runs. `[D]` `sdd` executes without pausing, which is right for work you'd never interrupt. Then check it can split — 3+ disjoint **file regions**, counted on files not tasks. Small scope, use `sdd` however many regions there are.
+
+**Watch for** `[D]`: worktrees must live **outside** the repo. Inside it, each is a full codebase copy in the editor's workspace root, and the TypeScript and C# language servers index every copy without deduping — eight of them once put 92,723 files into one workspace and exhausted 16 GB. Provision serially too; concurrent installs and builds are what exhaust memory, not the sessions.
+
 ---
 
 # Adaptation rules
@@ -248,6 +269,7 @@ Apply to any matched scenario; state which ones fired.
 | Diff spans several files, or subagents wrote it | Add `simplify` after implementation, before `code-review` — it *applies* fixes, so review must see final code | `[J]` |
 | Surgical work (bugfix, hotfix, one-liner, prototype) | **Skip `simplify`** — its reuse and altitude axes broaden a diff by design, and `prototype` forbids the abstractions it adds | `[J]` |
 | You want oversight between tasks | Use `executing-plans` — `sdd` explicitly refuses to pause | `[D]` |
+| Days of work spanning several independent areas | **Name both executors, don't default to `sdd`.** Scope decides and the plan doesn't exist yet, so say: `/split-the-plan` if it lands as days of work across 3+ disjoint regions, `sdd` otherwise. Every scenario writes `sdd` at that step, so the fork is invisible unless you surface it | `[J]` |
 | First time in this repo | `/setup-matt-pocock-skills` first | `[D]` |
 | Setup was never run | Only `to-spec`, `to-tickets`, `triage` hard-depend on it; everything else degrades silently — do **not** flag its absence | `[D]` |
 | Human-only setup needed (dashboards, keys, CI secrets) | Add `wizard` at the point of need | `[D]` |
