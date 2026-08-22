@@ -54,7 +54,7 @@ One row per package, and every field filled:
 | worktree | absolute path, from Phase 3 |
 | depends on | package slugs, or `—` |
 | done when | the command that proves it, not a description |
-| ref | blank until Phase 4 |
+| sessionId | blank until Phase 4; the stable key for this row |
 | status | `pending` |
 
 Also record **landing order** and any **non-file mutex** — a single EF model snapshot, dev server
@@ -96,15 +96,18 @@ not ask for session ids.
 When they confirm, read `~/.claude/sessions/*.json` and take every session where
 `startedAt > T` and `cwd` is at or under the repo. Those are the new chats.
 
-- **Key rows on `[ref]` from `ListAgents`, never on name.** Names derive from the cwd basename, so
-  N chats opened in one repo all share a prefix and can collide outright. A bare-name send to a
-  colliding name fails.
+- **Key rows on `sessionId`** — not the name, not the `[ref]`. `~/.claude/sessions/*.json` already
+  carries it, it is stable for the session's life, and it is the string on the editor tab. Names
+  churn and collide: N chats opened in one repo share a prefix, and a measured 13-session round saw
+  six rename inside a day, three report a `[ref]` that did not match `ListAgents`, and one send to a
+  peer's own ref refused. Send to the name — that is the address `SendMessage` takes — but record
+  the `sessionId`.
 - **`ListAgents` omits you.** Among sessions whose `pid` is alive, the one absent from `ListAgents`
   is this seat. Exclude it.
 - **If the count is short**, name how many you found and which packages are unbound, and wait. Never
   bind two packages to one session to make the numbers work.
 
-Write each `[ref]` into its map row and set `status: briefed`.
+Write each `sessionId` into its map row and set `status: briefed`.
 
 ## Phase 5 — brief
 
@@ -115,7 +118,7 @@ Two things the row does not carry and the message must:
 
 - **Where to work.** The chat's `cwd` is the repo root; its work is in the worktree. Every read,
   edit, and command uses absolute paths under the worktree. Never edit in the repo root.
-- **Its neighbours.** Who owns the packages it depends on, under what `[ref]`, and that
+- **Its neighbours.** Who owns the packages it depends on, under what name, and that
   `coordinating-with-peer-sessions` governs how they talk.
 
 Then stop. Do not brief in waves, and do not follow up to check receipt.
@@ -159,7 +162,7 @@ a stale map row routes the next run around a region nobody is in.
 | Plan paths don't survive Phase 1 | Fix the plan file first. Never fan out onto a stale premise |
 | Fewer than 3 disjoint regions | Stop; route to `subagent-driven-development` |
 | Human opens fewer chats than packages | Bind what exists, name the unbound packages, wait |
-| Two live sessions share a name | Key on `[ref]`; if `ListAgents` shows no `[ref]`, ask the human which is which |
+| Two live sessions share a name | Rows are keyed on `sessionId`, so they never merge. To send, ask the human which tab is which — do not guess from a `[ref]` |
 | A lane asks you to do something its permissions blocked | Refuse and surface it to the human. Doing it for them bypasses their permission decision |
 | A lane wants a file outside its fence | You do not widen a fence. Take it to the human |
 | Machine slows badly mid-run | Provisioning is the cause, not the sessions. Serialize harder; check for worktrees inside the repo |
