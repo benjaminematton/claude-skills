@@ -19,7 +19,12 @@ This is for work measured in **days**, where you will want to steer while it run
 `[D]` `subagent-driven-development` executes without pausing — correct for work you would never
 interrupt, wrong for work you would.
 
-Then check it can actually split: **3+ disjoint file regions**, counted on files, not tasks.
+Then check it can actually split:
+
+- **3+ disjoint file regions**, counted on files, not tasks.
+- **No lane needs another's edit to compile.** Deleting a member or changing a signature is one
+  atomic edit however many files it touches — split it and every lane's build stays red until all
+  of them land.
 
 Small scope, stop here and say so. N worktrees cost N dependency installs, N baseline runs, and N
 branches converging — more than an afternoon's plan saves.
